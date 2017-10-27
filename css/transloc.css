@@ -1,0 +1,21 @@
+html,
+body,
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#infoDiv {
+  position: absolute;
+  bottom: 15px;
+  right: 0;
+  max-height: 80%;
+  max-width: 300px;
+  background-color: black;
+  padding: 8px;
+  border-top-left-radius: 5px;
+  color: white;
+  opacity: 0.8;
+}
