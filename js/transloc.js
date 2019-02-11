@@ -8,8 +8,7 @@ require([
       "esri/geometry/Point",
       "esri/renderers/SimpleRenderer",
       "esri/symbols/SimpleMarkerSymbol",
-      "esri/renderers/UniqueValueRenderer",
-      "esri/layers/support/LabelClass",
+      "esri/renderers/UniqueValueRenderer",      
       "esri/widgets/Legend",
       "esri/request",
       "dojo/_base/array",
@@ -17,7 +16,7 @@ require([
       "dojo/on",
       "dojo/domReady!"
     ], function(esriConfig, MapView, Map, FeatureLayer, Field, Point,
-      SimpleRenderer, SimpleMarkerSymbol, UniqueValueRenderer, LabelClass, Legend, esriRequest,
+      SimpleRenderer, SimpleMarkerSymbol, UniqueValueRenderer, Legend, esriRequest,
       arrayUtils, dom, on
     ) {
 
@@ -259,7 +258,8 @@ require([
         ]
       };
 
-      view.then(function() {          
+      view.then(function() { 
+        getBus();         
         setInterval(function(){ getBus() }, 4000).then(getStopsData());
       });
 
@@ -360,17 +360,6 @@ require([
         });               
       }
 
-      var statesLabelClass = new LabelClass({
-        labelExpressionInfo: { expression: "$feature.code" },
-        symbol: {
-          type: "text",  // autocasts as new TextSymbol()
-          color: "black",
-          haloSize: 1,
-          haloColor: "white"
-        }
-      });
-
-
       function createLayerStops(graphics) {
         //console.log(graphics)
         //map.remove(lyrStops)
@@ -383,7 +372,7 @@ require([
           renderer: stopsRenderer, // set the visualization on the layer
           spatialReference: {
             wkid: 4326
-          },
+          },          
           geometryType: "point", // Must be set when creating a layer from Graphics
           //popupTemplate: pTemplate
           /*labelsVisible: true,
@@ -393,8 +382,7 @@ require([
         });
         
         map.add(lyrStops);
-        lyrStops.labelsVisible = true;
-        lyrStops.labelingInfo = [ statesLabelClass ];
+        
         return lyrStops;
       }
       
